@@ -1,0 +1,13 @@
+# Byte‑compiled / cache
+__pycache__/
+*.py[cod]
+
+# Entorno virtual
+venv/
+.env
+
+# Base de datos local de usuarios (SQLite)
+usuarios.db
+
+# Logs y archivos temporales
+*.log
