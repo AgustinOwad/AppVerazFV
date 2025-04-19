@@ -1,0 +1,115 @@
+/* assets/custom.css */
+
+/* Ajuste de padding general de la navbar */
+.navbar {
+    padding: 0 1rem;
+  }
+  
+  /* Pill-group: contenedor input+botón */
+  .pill-group {
+    display: flex;
+    width: 30%;
+    min-width: 200px;
+    max-width: 500px;
+  }
+  
+  /* Input del pill */
+  .pill-input {
+    flex: 1 1 auto;
+    border-top-left-radius: 50px !important;
+    border-bottom-left-radius: 50px !important;
+    border: none !important;
+    background-color: #ffffff;
+  }
+  
+  /* Botón del pill */
+  .pill-button {
+    flex: 0 0 auto;
+    border-top-right-radius: 50px !important;
+    border-bottom-right-radius: 50px !important;
+    border: none !important;
+  }
+  
+  /* Título */
+  .header-title {
+    flex: 1;
+    text-align: right;
+    font-size: 1.7rem;
+    margin: 0 1rem;
+    color: white;
+  }
+  
+  /* Divider vertical */
+  .divider {
+    width: 1px;
+    background-color: rgba(255,255,255,0.3);
+    height: 60px;
+    margin: 0 1rem;
+  }
+  
+  /* Logo */
+  .navbar-logo {
+    height: 60px;
+    width: auto;
+  }
+  
+/* Forzar tamaño y alineación del botón de cierre en login-alert */
+#login-alert > .btn-close {
+    height: 100%;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+.bg-sit-2 { background-color: #FFE5E5; color: #000000; }
+.bg-sit-3 { background-color: #FFBFBF; color: #000000; }
+.bg-sit-4 { background-color: #FF8080; color: #FFFFFF; }
+.bg-sit-5 { background-color: #FF4C4C; color: #FFFFFF; }
+
+/* Aplica fondo y texto blanco a TODO header de Ag‑Grid */
+.ag-theme-alpine-dark .ag-header-cell,
+.ag-theme-alpine-dark .ag-header-group-cell {
+  background-color: #393939 !important;
+  color: white           !important;
+  text-align: center     !important;
+}
+
+/* Línea separadora full‑height en todos los headers */
+.ag-theme-alpine-dark .ag-header-group-cell,
+.ag-theme-alpine-dark .ag-header-cell {
+  border-right: 1px solid rgb(255, 255, 255) !important;
+}
+
+/* Oculta el drag‑handle de resize */
+.ag-theme-alpine-dark .ag-header-cell-resize {
+  display: none !important;
+}
+
+/* (Opcional) también quita el cursor col-resize */
+.ag-theme-alpine-dark .ag-header-cell {
+  cursor: default !important;
+}
+
+/* Centrar texto en headers “leaf” */
+.ag-theme-alpine-dark .ag-header-cell .ag-header-cell-label {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* 1) Asegura que el label del grupo ocupe todo el ancho */
+.ag-theme-alpine-dark .ag-header-group-cell-label,
+.ag-theme-alpine-dark .ag-header-group-cell-label.ag-sticky-label {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+/* 2) Haz que el span del año sea inline-block y ocupe el 100% */
+.ag-theme-alpine-dark .ag-header-group-text {
+  display: inline-block !important;
+  width: 100% !important;
+  text-align: center !important;
+}
