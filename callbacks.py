@@ -189,10 +189,23 @@ def register_callbacks(app):
         )
 
         table = crear_pivot_table_aggrid(data["periodos"])
-        torta = dcc.Graph(figure=crear_grafico_torta(
-            sorted(data["periodos"], key=lambda p: p["periodo"], reverse=True)[0]["entidades"]
-        ))
-        evo = dcc.Graph(figure=crear_grafico_evolucion(data["periodos"]))
+        
+        periodos = data["periodos"]
+        ultimo = sorted(periodos, key=lambda p: p["periodo"], reverse=True)[0]
+        entidades = ultimo["entidades"]
+
+        # gráfico de torta simple como antes
+        torta = dcc.Graph(
+            figure=crear_grafico_torta(entidades),
+            config={'responsive': True},
+            style={'flex': '1 1 auto', 'minHeight': '0', 'width': '100%'}
+        )
+
+        evo = dcc.Graph(
+            figure=crear_grafico_evolucion(data["periodos"]),
+            config={'responsive': True},
+            style={'width': '100%', 'height': '100%'}
+        )
 
         header = html.Thead(html.Tr([
             html.Th("Mes-Año"), html.Th("Entidad"),
