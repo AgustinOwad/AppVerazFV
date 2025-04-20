@@ -54,40 +54,41 @@ def crear_grafico_torta(entidades):
             for i in range(len(labels))
         ]
 
-        # 4) Crear el gráfico de barras horizontal
-        fig = px.bar(
-            x=sizes,
-            y=list(labels),
-            orientation="h",
-            color=list(labels),
-            color_discrete_sequence=[CORP_PALETTE[i % len(CORP_PALETTE)] for i in range(len(labels))],
-            labels={"x": "Monto", "y": "Acreedores"}
-        )
-
-        # 5) Quitar ticks del eje Y pero mantener título
-        fig.update_yaxes(showticklabels=False, title_text="Acreedores",
-                        categoryorder="array", categoryarray=list(labels))
-
-        # 6) Texto de datos dentro/fuera según tamaño de barra
+        # 4) Crear manualmente el gráfico de barras horizontal para asegurar hover/textos correctos
         textpos = ["inside" if v/total >= 0.10 else "outside" for v in sizes]
-        fig.update_traces(
-            text=texts,
-            textposition=textpos,
-            textfont=dict(size=11),
-            hovertemplate="Situación: %{customdata}<extra></extra>",
-            customdata=list(situations),
-            marker_line_color="#2D2D2D",
-            marker_line_width=1
+        fig = go.Figure(
+            go.Bar(
+                x=sizes,
+                y=list(labels),
+                orientation="h",
+                marker_color=[CORP_PALETTE[i % len(CORP_PALETTE)] for i in range(len(labels))],
+                marker_line_color="#2D2D2D",
+                marker_line_width=1,
+                text=texts,                     # Textos ya alineados uno a uno
+                textposition=textpos,
+                textangle=0,                    # Fuerza horizontal
+                customdata=list(situations),    # Situación por cada barra (incluye "N/A")
+                hovertemplate=(
+                    "%{y}<br>"
+                    "Situación: %{customdata}<br>"
+                    "Monto: $%{x:,.0f}"
+                    "<extra></extra>"
+                ),
+            )
         )
-
-        # 7) Formato eje X con sufijo K/M y prefijo $
+        # 5) Ejes y layout (conservamos exactamente tu configuración aprobada)
+        fig.update_yaxes(
+            showticklabels=False,
+            title_text="Acreedores",
+            categoryorder="array",
+            categoryarray=list(labels)
+        )
         fig.update_xaxes(
             tickformat="~s",
             tickprefix="$",
-            ticks="outside"
+            ticks="outside",
+            gridcolor="#424242"
         )
-
-        # 8) Layout general
         fig.update_layout(
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
@@ -96,7 +97,6 @@ def crear_grafico_torta(entidades):
             margin=dict(l=20, r=20, t=0, b=20),
             transition={"duration": 500, "easing": "cubic-in-out"}
         )
-
         return fig
 
     # 4) Agrupar <3% en “Otros”
