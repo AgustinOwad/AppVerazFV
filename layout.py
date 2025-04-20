@@ -192,40 +192,42 @@ def dashboard_layout():
                         ],
                         className="mb-4"
                     ),
-                    dbc.Row(
-                         [
-                             dbc.Col(
-                                dbc.Card(
-                                    [
-                                        dbc.CardHeader("Distribución por Acreedor"),
-                                        # Hacemos que el CardBody sea flex column
-                                        dbc.CardBody(
-                                            html.Div(id="grafico-torta"),
-                                            style={
-                                                "display": "flex",
-                                                "flexDirection": "column",
-                                                "height": "100%",  # occupe todo el Card
-                                                "padding": "0"
-                                            }
-                                        )
-                                    ],
-                                    style={"height": "100%"}  # El Card ocupa todo el Col
+                        dbc.Row(
+                            [
+                                dbc.Col(
+                                    dbc.Card(
+                                        [
+                                            dbc.CardHeader("Distribución por Acreedor"),
+                                            dbc.CardBody(
+                                                html.Div(id="grafico-torta"),
+                                                className="flex-grow-1 d-flex flex-column",
+                                                style={"padding-bottom": "1rem", "overflow": "visible"}
+                                            ),
+                                        ],
+                                        className="h-100 d-flex flex-column"
+                                    ),
+                                    md=6,
+                                    className="h-100"
                                 ),
-                                md=6,
-                                style={"height": "450px"}  # o el valor que prefieras
-                            ),
-                             dbc.Col(
-                                 dbc.Card(
-                                     [
-                                         dbc.CardHeader("Evolución Total"),
-                                         dbc.CardBody(html.Div(id="grafico-evolucion"))
-                                     ]
-                                 ),
-                                 md=6
-                             ),
-                         ],
-                         className="mb-4"
-                     ),
+                                dbc.Col(
+                                    dbc.Card(
+                                        [
+                                            dbc.CardHeader("Evolución Total"),
+                                            dbc.CardBody(
+                                                html.Div(id="grafico-evolucion"),
+                                                className="flex-grow-1 d-flex flex-column",
+                                                style={"padding-bottom": "1rem", "overflow": "visible"}
+                                            ),
+                                        ],
+                                        className="h-100 d-flex flex-column"
+                                    ),
+                                    md=6,
+                                    className="h-100"
+                                ),
+                            ],
+                            className="mb-4",
+                            align="stretch"
+                        ),
                     dbc.Card(
                         [
                             dbc.CardHeader("Detalle Mes-Año por Entidad"),

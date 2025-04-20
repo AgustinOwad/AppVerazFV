@@ -94,8 +94,13 @@ def crear_grafico_torta(entidades):
             plot_bgcolor="rgba(0,0,0,0)",
             font_color="white",
             showlegend=False,
-            margin=dict(l=20, r=20, t=0, b=20),
+            margin=dict(l=20, r=20, t=0, b=50),
             transition={"duration": 500, "easing": "cubic-in-out"}
+        )
+        fig.add_annotation(
+            text="Fuente: API BCRA – Central de Deudores",
+            x=0.5,y=-0.11,xref="paper",yref="paper",
+            showarrow=False,font=dict(size=11,color="white")
         )
         return fig
 
@@ -167,8 +172,8 @@ def crear_grafico_torta(entidades):
     )
     fig.add_annotation(
         text="Fuente: API BCRA – Central de Deudores",
-        x=0.5,y=-0.05,xref="paper",yref="paper",
-        showarrow=False,font=dict(size=10,color="white")
+        x=0.5,y=-0.01,xref="paper",yref="paper",
+        showarrow=False,font=dict(size=11,color="white")
     )
     return fig
 
