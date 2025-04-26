@@ -4,6 +4,7 @@ from dash import Output, Input, State, callback_context, no_update, dcc, html
 from dash.exceptions import PreventUpdate
 import pandas as pd
 import dash_bootstrap_components as dbc
+import json
 
 from auth import verificar_credenciales
 from sql_api import consultar_deuda_historica
@@ -200,9 +201,26 @@ def register_callbacks(app):
             config={'responsive': True},
             style={'flex': '1 1 auto', 'minHeight': '0', 'width': '100%'}
         )
-
+        
+        # ——— DEBUG: inspeccionamos la figura de evolución antes de renderizarla ———
+        import json
+        from utils.plot_helpers import crear_grafico_evolucion
+        # Generamos la figura y la almacenamos en `fig`
+        fig = crear_grafico_evolucion(data["periodos"])
+        # 1) Layout completo
+        print("LAYOUT JSON:\n", json.dumps(fig.layout.to_plotly_json(), indent=2,default=str))
+        # 2) Tickvals del eje X principal
+        if hasattr(fig.layout, "xaxis") and fig.layout.xaxis.tickvals is not None:
+            tickvals = [d.strftime("%Y-%m") for d in fig.layout.xaxis.tickvals]
+            print("TICKVALS (YYYY-MM):", tickvals)
+        # 3) Configuración de xaxis2 (si existe)
+        if hasattr(fig.layout, "xaxis2"):
+            print("XAXIS2 CONFIG:\n", json.dumps(fig.layout.xaxis2.to_plotly_json(), indent=2,default=str))
+        else:
+            print("No se encontró eje secundario xaxis2.")
+        # ————————————————————————————————————————————————————————————————
         evo = dcc.Graph(
-            figure=crear_grafico_evolucion(data["periodos"]),
+            figure=fig,
             config={'responsive': True},
             style={'width': '100%', 'height': '100%'}
         )
